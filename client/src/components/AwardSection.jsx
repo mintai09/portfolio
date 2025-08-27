@@ -1,15 +1,19 @@
 import React from "react";
 import { awards } from "../data/award";
+
 export default function AwardsSection() {
   return (
-    <section id="awards" className="py-24 bg-gradient-to-br from-amber-50 via-orange-50 to-red-50 text-gray-800 relative overflow-hidden">
+    <section
+      id="awards"
+      className="py-24 bg-gradient-to-br from-amber-50 via-orange-50 to-red-50 text-gray-800 relative overflow-hidden"
+    >
       {/* Background decorative elements */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-20 left-10 w-40 h-40 bg-amber-200/20 rounded-full blur-3xl"></div>
         <div className="absolute bottom-20 right-10 w-60 h-60 bg-orange-200/30 rounded-full blur-3xl"></div>
         <div className="absolute top-1/2 left-1/2 w-32 h-32 bg-red-200/20 rounded-full blur-2xl"></div>
       </div>
-      
+
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-amber-600 via-orange-600 to-red-600 bg-clip-text text-transparent mb-4">
@@ -20,6 +24,7 @@ export default function AwardsSection() {
           </p>
           <div className="w-24 h-1 bg-gradient-to-r from-amber-500 to-orange-500 mx-auto mt-4 rounded-full"></div>
         </div>
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {awards.map((item, idx) => (
             <div
@@ -34,13 +39,13 @@ export default function AwardsSection() {
                 />
                 {/* Overlay gradient */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                
+
                 {/* Award badge */}
                 <div className="absolute top-4 right-4 w-12 h-12 bg-gradient-to-br from-amber-400 to-orange-500 rounded-full flex items-center justify-center text-white text-xl shadow-lg">
                   🏆
                 </div>
               </div>
-              
+
               <div className="p-6 flex flex-col justify-between flex-1">
                 <div className="mb-4">
                   <h3 className="text-xl font-bold bg-gradient-to-r from-amber-700 to-orange-700 bg-clip-text text-transparent mb-2 group-hover:from-amber-600 group-hover:to-orange-600 transition-all duration-300">
@@ -52,7 +57,7 @@ export default function AwardsSection() {
                     <span className="text-sm font-medium">{item.year}</span>
                   </div>
                 </div>
-                
+
                 <a
                   href={item.link}
                   target="_blank"
@@ -61,13 +66,24 @@ export default function AwardsSection() {
                 >
                   <span>📰</span>
                   기사 링크 보기
-                  <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  <svg
+                    className="w-4 h-4 transition-transform group-hover:translate-x-1"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 5l7 7-7 7"
+                    />
                   </svg>
                 </a>
               </div>
             </div>
-          ))
+          ))}{" "}
+          {/* ✅ map 닫는 중괄호 위치 수정 */}
         </div>
       </div>
     </section>
