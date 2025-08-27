@@ -2,7 +2,7 @@ export default function HeroSection() {
   return (
     <section
       className="min-h-screen bg-cover bg-center flex items-center"
-      style={{ backgroundImage: "url('/assets/bg.png')" }}
+      style={{ backgroundImage: "url('/portfolio/assets/bg.png')" }} // 👈 수정!
       id="home"
     >
       <div className="container mx-auto px-4 sm:px-6 flex flex-col md:flex-row items-center justify-between gap-10">
@@ -52,15 +52,13 @@ export default function HeroSection() {
 
         {/* 오른쪽 이미지 */}
         <div className="md:mt-0">
-          <div className="md:mt-0">
-            <div className="mt-10 md:mt-0">
-              <div className="rounded-full border-4 border-black p-0.5">
-                <img
-                  src="/assets/profile_2.jpg"
-                  alt="profile"
-                  className="w-96 h-96 rounded-full object-cover object-center"
-                />
-              </div>
+          <div className="mt-10 md:mt-0">
+            <div className="rounded-full border-4 border-black p-0.5">
+              <img
+                src="/portfolio/assets/profile_2.jpg" // 👈 수정!
+                alt="profile"
+                className="w-96 h-96 rounded-full object-cover object-center"
+              />
             </div>
           </div>
         </div>
