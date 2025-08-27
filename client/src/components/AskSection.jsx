@@ -153,34 +153,35 @@ export default function AskSection() {
           </div>
         </div>
 
-        <div className="mt-6 bg-white/70 backdrop-blur-sm rounded-2xl p-4 border border-white/50 shadow-lg">
-          <div className="flex gap-4">
+        <div className="mt-6 bg-white/70 backdrop-blur-sm rounded-2xl p-3 sm:p-4 border border-white/50 shadow-lg">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
             <input
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && !loading && sendMessage()}
-              placeholder="질문을 입력하세요... (예: 연구 경험이나 AI 프로젝트에 대해 물어보세요!)"
-              className="flex-1 bg-transparent border-none outline-none text-gray-800 placeholder-gray-500 text-lg px-4 py-3"
+              placeholder="질문을 입력하세요..."
+              className="flex-1 bg-transparent border-none outline-none text-gray-800 placeholder-gray-500 text-base sm:text-lg px-3 sm:px-4 py-3 min-w-0"
               disabled={loading}
             />
             <button
               onClick={sendMessage}
               disabled={loading || !input.trim()}
-              className={`px-8 py-3 rounded-xl font-semibold transition-all duration-200 transform ${
+              className={`px-4 sm:px-8 py-3 rounded-xl font-semibold transition-all duration-200 transform whitespace-nowrap ${
                 loading || !input.trim()
                   ? "bg-gray-300 text-gray-500 cursor-not-allowed"
                   : "bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white shadow-lg hover:shadow-xl hover:scale-105 active:scale-95"
               }`}
             >
               {loading ? (
-                <div className="flex items-center gap-2">
+                <div className="flex items-center justify-center gap-2">
                   <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-                  생성 중
+                  <span className="hidden sm:inline">생성 중</span>
+                  <span className="sm:hidden">...</span>
                 </div>
               ) : (
-                <div className="flex items-center gap-2">
+                <div className="flex items-center justify-center gap-2">
                   <span>🚀</span>
-                  보내기
+                  <span>보내기</span>
                 </div>
               )}
             </button>
