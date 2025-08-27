@@ -14,16 +14,22 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="bg-black bg-opacity-70 text-white fixed top-0 left-0 w-full z-50 backdrop-blur-md px-4 sm:px-8 py-3">
+    <nav className="bg-black/80 backdrop-blur-xl text-white fixed top-0 left-0 w-full z-50 border-b border-white/10 px-4 sm:px-8 py-4 transition-all duration-300">
       <div className="flex justify-between items-center">
-        <div className="text-lg sm:text-xl font-bold">Mintai Kim</div>
+        <div className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-white via-teal-200 to-blue-200 bg-clip-text text-transparent">
+          Mintai Kim
+        </div>
 
-        {/* 모바일 메뉴 버튼 */}
+        {/* Enhanced mobile menu button */}
         <button
-          className="sm:hidden text-2xl"
+          className="sm:hidden w-10 h-10 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center text-xl hover:bg-white/20 transition-all duration-200 transform hover:scale-105"
           onClick={() => setIsOpen((prev) => !prev)}
         >
-          ☰
+          <span className={`transform transition-transform duration-300 ${
+            isOpen ? "rotate-90" : "rotate-0"
+          }`}>
+            ☰
+          </span>
         </button>
 
         {/* Enhanced desktop menu */}
