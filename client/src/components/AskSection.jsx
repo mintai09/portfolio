@@ -68,51 +68,123 @@ export default function AskSection() {
   }, [history]);
 
   return (
-    <section id="ask" className="bg-white py-20 px-6">
-      <div className="max-w-3xl mx-auto">
-        <h2 className="text-2xl font-bold mb-4 text-center text-indigo-600">
-          💬 Ask me anything
-        </h2>
-
-        <div className="h-[400px] overflow-y-auto bg-gray-100 p-4 rounded shadow">
-          {history.map((msg, idx) => (
-            <div
-              key={idx}
-              className={`mb-3 ${
-                msg.role === "user" ? "text-right" : "text-left"
-              }`}
-            >
-              <p
-                className={`inline-block p-2 rounded whitespace-pre-wrap ${
-                  msg.role === "user" ? "bg-blue-200" : "bg-gray-200"
-                }`}
-              >
-                {msg.content}
-              </p>
-            </div>
-          ))}
-          {loading && (
-            <div className="text-gray-400 text-sm italic">답변 생성 중...</div>
-          )}
-          <div ref={bottomRef}></div>
+    <section id="ask" className="bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 py-24 px-6 relative overflow-hidden">
+      {/* Background decorative elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-20 left-10 w-40 h-40 bg-indigo-200/20 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 right-10 w-60 h-60 bg-purple-200/30 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/2 left-1/2 w-32 h-32 bg-pink-200/20 rounded-full blur-2xl"></div>
+      </div>
+      
+      <div className="max-w-4xl mx-auto relative z-10">
+        <div className="text-center mb-12">
+          <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-4">
+            💬 Ask Me Anything
+          </h2>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            Have questions about my research, AI projects, or career journey? I'm here to help!
+          </p>
+          <div className="w-24 h-1 bg-gradient-to-r from-indigo-500 to-purple-500 mx-auto mt-4 rounded-full"></div>
         </div>
 
-        <div className="mt-4 flex gap-2">
-          <input
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={(e) => e.key === "Enter" && sendMessage()}
-            placeholder="질문을 입력하세요..."
-            className="flex-1 border px-4 py-2 rounded"
-            disabled={loading}
-          />
-          <button
-            onClick={sendMessage}
-            disabled={loading}
-            className="bg-indigo-600 text-white px-4 py-2 rounded"
-          >
-            {loading ? "응답 중..." : "보내기"}
-          </button>
+        <div className="bg-white/70 backdrop-blur-sm rounded-3xl shadow-2xl border border-white/50 overflow-hidden">
+          <div className="h-[500px] overflow-y-auto p-6 space-y-4 scrollbar-thin scrollbar-thumb-indigo-200 scrollbar-track-transparent">
+            {history.length === 0 && (
+              <div className="text-center py-16">
+                <div className="w-20 h-20 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full flex items-center justify-center text-white text-3xl mx-auto mb-4">
+                  🤖
+                </div>
+                <p className="text-gray-500 text-lg font-medium">Start a conversation!</p>
+                <p className="text-gray-400 text-sm mt-2">Ask me about my research, projects, or anything else.</p>
+              </div>
+            )}
+            
+            {history.map((msg, idx) => (
+              <div
+                key={idx}
+                className={`flex ${
+                  msg.role === "user" ? "justify-end" : "justify-start"
+                }`}
+              >
+                <div className={`flex items-start gap-3 max-w-[80%] ${
+                  msg.role === "user" ? "flex-row-reverse" : "flex-row"
+                }`}>
+                  {/* Avatar */}
+                  <div className={`flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center text-white ${
+                    msg.role === "user" 
+                      ? "bg-gradient-to-br from-blue-500 to-indigo-600" 
+                      : "bg-gradient-to-br from-purple-500 to-pink-600"
+                  }`}>
+                    {msg.role === "user" ? "👤" : "🤖"}
+                  </div>
+                  
+                  {/* Message bubble */}
+                  <div className={`p-4 rounded-2xl shadow-lg ${
+                    msg.role === "user" 
+                      ? "bg-gradient-to-br from-blue-500 to-indigo-600 text-white" 
+                      : "bg-white border border-gray-200 text-gray-800"
+                  }`}>
+                    <p className="whitespace-pre-wrap leading-relaxed">{msg.content}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+            
+            {loading && (
+              <div className="flex justify-start">
+                <div className="flex items-start gap-3">
+                  <div className="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center text-white">
+                    🤖
+                  </div>
+                  <div className="bg-white border border-gray-200 p-4 rounded-2xl shadow-lg">
+                    <div className="flex items-center gap-2">
+                      <div className="flex space-x-1">
+                        <div className="w-2 h-2 bg-indigo-500 rounded-full animate-bounce"></div>
+                        <div className="w-2 h-2 bg-purple-500 rounded-full animate-bounce delay-75"></div>
+                        <div className="w-2 h-2 bg-pink-500 rounded-full animate-bounce delay-150"></div>
+                      </div>
+                      <span className="text-gray-500 text-sm font-medium">답변 생성 중...</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+            <div ref={bottomRef}></div>
+          </div>
+        </div>
+
+        <div className="mt-6 bg-white/70 backdrop-blur-sm rounded-2xl p-4 border border-white/50 shadow-lg">
+          <div className="flex gap-4">
+            <input
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && !loading && sendMessage()}
+              placeholder="질문을 입력하세요... (예: 연구 경험이나 AI 프로젝트에 대해 물어보세요!)"
+              className="flex-1 bg-transparent border-none outline-none text-gray-800 placeholder-gray-500 text-lg px-4 py-3"
+              disabled={loading}
+            />
+            <button
+              onClick={sendMessage}
+              disabled={loading || !input.trim()}
+              className={`px-8 py-3 rounded-xl font-semibold transition-all duration-200 transform ${
+                loading || !input.trim()
+                  ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                  : "bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white shadow-lg hover:shadow-xl hover:scale-105 active:scale-95"
+              }`}
+            >
+              {loading ? (
+                <div className="flex items-center gap-2">
+                  <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                  생성 중
+                </div>
+              ) : (
+                <div className="flex items-center gap-2">
+                  <span>🚀</span>
+                  보내기
+                </div>
+              )}
+            </button>
+          </div>
         </div>
       </div>
     </section>
